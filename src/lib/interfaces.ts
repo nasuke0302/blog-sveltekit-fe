@@ -43,6 +43,7 @@ export interface IPost {
 	slug: ISlug;
 	author: IAuthor;
 	body: PortableText;
+	mainImage: IImage;
 	categories: ICategory[];
 	_updatedAt: string;
 }
