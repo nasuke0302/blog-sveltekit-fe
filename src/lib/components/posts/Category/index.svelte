@@ -17,5 +17,6 @@
 		padding: 0.4rem 0.5rem;
 		background-color: steelblue;
 		border-radius: 1rem;
+		vertical-align: middle;
 	}
 </style>
