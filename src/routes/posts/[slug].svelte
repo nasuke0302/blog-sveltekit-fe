@@ -49,10 +49,6 @@
 		margin-bottom: 1.5rem;
 	}
 
-	.post-author {
-		font-weight: 300;
-	}
-
 	.post-info {
 		display: flex;
 		flex-flow: column;
@@ -60,6 +56,15 @@
 		align-items: flex-start;
 		grid-gap: 1rem;
 		margin-bottom: 1rem;
+	}
+
+	.post-tags {
+		display: flex;
+		gap: 0.3rem;
+	}
+
+	.post-author {
+		font-weight: 300;
 	}
 
 	.post-author > a {

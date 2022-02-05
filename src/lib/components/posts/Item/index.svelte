@@ -46,6 +46,7 @@
 		border-radius: 0.5rem;
 		padding: 1rem;
 		transition: 0.2s all ease;
+		box-shadow: 0 1px 3px rgb(186, 186, 186);
 	}
 
 	.post:hover {
