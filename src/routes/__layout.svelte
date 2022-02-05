@@ -46,7 +46,7 @@
 		font-family: 'Montserrat', sans-serif;
 	}
 
-	:global(p, a, span) {
+	:global(p, a, span, time) {
 		margin: 0;
 		color: rgb(48, 48, 48);
 		font-family: 'Roboto', sans-serif;

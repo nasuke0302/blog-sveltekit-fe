@@ -1,6 +1,8 @@
 <script>
 	import Item from '../Item/index.svelte';
+	/** @type {import('$lib/interfaces').IPost[]} */
 	export let posts;
+	/** {String} */
 	export let title = 'Recent Posts';
 </script>
 
@@ -23,7 +25,7 @@
 	}
 
 	h2 {
-        text-align: center;
+		text-align: center;
 		margin-bottom: 1rem;
 	}
 

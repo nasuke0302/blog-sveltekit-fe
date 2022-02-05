@@ -1,5 +1,7 @@
 <script>
-	import Posts from '../components/posts/List/index.svelte';
+	import Posts from '$lib/components/posts/List/index.svelte';
+
+	/** @type {import('$lib/interfaces').IPost[]} */
 	export let posts;
 </script>
 

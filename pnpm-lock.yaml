@@ -1,6 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@portabletext/svelte': ^0.2.0
   '@sveltejs/adapter-auto': next
   '@sveltejs/kit': next
   '@typescript-eslint/eslint-plugin': ^5.10.1
@@ -17,6 +18,7 @@ specifiers:
   typescript: ^4.4.3
 
 devDependencies:
+  '@portabletext/svelte': 0.2.0_svelte@3.46.4
   '@sveltejs/adapter-auto': 1.0.0-next.17
   '@sveltejs/kit': 1.0.0-next.260_svelte@3.46.4
   '@typescript-eslint/eslint-plugin': 5.10.2_3e19df30e549eb9672c3b79dc40c1d5f
@@ -109,6 +111,14 @@ packages:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.13.0
+    dev: true
+
+  /@portabletext/svelte/0.2.0_svelte@3.46.4:
+    resolution: {integrity: sha512-9CWGM0ud3eyjF01ox8MZVAkv0YUKBtKKok8EpAZpFpFo4RnhCBqfD8GhcsZ6AyYCRcVKreAeba8kU5pk0mo0/Q==}
+    peerDependencies:
+      svelte: ^3.40.0
+    dependencies:
+      svelte: 3.46.4
     dev: true
 
   /@rollup/pluginutils/4.1.2:
