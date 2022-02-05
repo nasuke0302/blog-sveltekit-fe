@@ -1,44 +1,37 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import type PortableText from '@portabletext/svelte';
+	import Category from '$lib/components/posts/Category/index.svelte';
+	import { toPlainText } from '$lib/utils';
+	import type { IPost } from '$lib/interfaces';
 
-	/** @type {import('$lib/interfaces').IPost} */
-	export let post;
-
-	function toPlainText(blocks: PortableText) {
-		if (!blocks) return '';
-		return (
-			blocks
-				// loop through each block
-				.map((block) => {
-					// if it's not a text block with children,
-					// return nothing
-					if (block._type !== 'block' || !block.children) {
-						return '';
-					}
-					// loop through the children spans, and join the
-					// text strings
-					return block.children.map((child) => child.text).join('');
-				})
-				// join the paragraphs leaving split by two linebreaks
-				.join('\n\n')
-		);
-	}
+	export let post: IPost;
 
 	const truncatedBody = toPlainText(post.body).slice(0, 200);
 </script>
 
 <div class="post" on:click={() => goto(`/posts/${post.slug.current}`)}>
 	{#if post._updatedAt}
-		<h6>{new Date(post._updatedAt).toLocaleString()}</h6>
+		<h6>Last updated on {new Date(post._updatedAt).toLocaleString()}</h6>
 	{/if}
 
 	{#if post.title}
 		<h4>{post.title}</h4>
 	{/if}
 
+	{#if post.author}
+		<span>By {post.author.name}</span>
+	{/if}
+
 	{#if post.body}
 		<p>{truncatedBody}...</p>
+	{/if}
+
+	{#if post.categories}
+		<div class="categories">
+			{#each post.categories as cat}
+				<Category category={cat} />
+			{/each}
+		</div>
 	{/if}
 </div>
 
@@ -68,5 +61,20 @@
 		color: rgb(136, 136, 136);
 		font-size: 1.5rem;
 		margin-bottom: 0.8rem;
+	}
+
+	span {
+		color: rgb(136, 136, 136);
+		font-size: 0.7rem;
+		margin-bottom: 0.3rem;
+	}
+
+	.categories {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: flex-start;
+		align-items: center;
+		grid-gap: 0.5rem;
+		margin-top: 1rem;
 	}
 </style>

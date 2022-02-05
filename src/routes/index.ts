@@ -4,7 +4,7 @@ import { client } from '$lib/utils';
 export async function get() {
 	try {
 		const posts = await client.fetch(
-			`*[_type=="post"]{_id, _updatedAt, title, slug, body, author->{name, slug}, categories[]->{title}}`
+			`*[_type=="post"]{_id, _updatedAt, title, slug, body, author->{name}, categories[]->{title}}`
 		);
 		return {
 			body: { posts }

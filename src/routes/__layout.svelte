@@ -38,7 +38,10 @@
 	:global(body) {
 		margin: 0;
 		padding: 0;
-		background-color: rgb(230, 230, 230);
+		background-color: rgb(248, 247, 247);
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
 	}
 
 	:global(h1, h2, h3, h4, h5, h6) {
@@ -70,6 +73,7 @@
 	}
 
 	main {
+		flex-grow: 1;
 		padding: 1rem;
 		max-width: 60rem;
 		margin: auto;

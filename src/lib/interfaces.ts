@@ -4,7 +4,7 @@ interface ISlug {
 	current: string;
 }
 
-interface ICategory {
+export interface ICategory {
 	title: string;
 }
 

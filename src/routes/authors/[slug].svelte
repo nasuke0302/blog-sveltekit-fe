@@ -57,6 +57,11 @@
 		grid-gap: 1rem;
 	}
 
+	.posts {
+		margin-top: 2rem;
+		margin-bottom: 2rem;
+	}
+
 	@media (min-width: 48rem) {
 		.author-container {
 			grid-template-columns: 250px auto;
