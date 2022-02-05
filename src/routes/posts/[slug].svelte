@@ -16,7 +16,7 @@
 		<h1>{post.title}</h1>
 		{#if post.author}
 			<p class="post-author">
-				Written by <a href={`authors/${post.author.slug.current}`}>{post.author.name}</a>
+				Written by <a href={`/authors/${post.author.slug.current}`}>{post.author.name}</a>
 			</p>
 		{/if}
 		<div>

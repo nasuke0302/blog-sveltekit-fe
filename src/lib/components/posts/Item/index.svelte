@@ -1,10 +1,12 @@
-<script>
+<script lang="ts">
 	import { goto } from '$app/navigation';
+	import type PortableText from '@portabletext/svelte';
 
 	/** @type {import('$lib/interfaces').IPost} */
 	export let post;
 
-	function toPlainText(blocks = []) {
+	function toPlainText(blocks: PortableText) {
+		if (!blocks) return '';
 		return (
 			blocks
 				// loop through each block
@@ -24,10 +26,9 @@
 	}
 
 	const truncatedBody = toPlainText(post.body).slice(0, 200);
-	console.log(truncatedBody);
 </script>
 
-<div class="post" on:click={() => goto(`posts/${post.slug.current}`)}>
+<div class="post" on:click={() => goto(`/posts/${post.slug.current}`)}>
 	{#if post._updatedAt}
 		<h6>{new Date(post._updatedAt).toLocaleString()}</h6>
 	{/if}
