@@ -1,4 +1,6 @@
 <script>
+	import '../tailwind.css';
+
 	const links = [
 		{ href: '/', text: 'Home' },
 		{ href: '/about', text: 'About' },
@@ -12,23 +14,26 @@
 	</style>
 </svelte:head>
 
-<nav>
+<nav
+	class="p-4 pl-8 flex flex-row flex-nowrap justify-center md:justify-start items-center bg-green-600"
+>
 	{#each links as link}
-		<a href={link.href}>{link.text}</a>
+		<a href={link.href} class="text-white font-5 no-underline p-4">{link.text}</a>
 	{/each}
 </nav>
 
-<main>
+<main class="grow max-w-4xl m-auto p-4 lg:p-0">
 	<slot />
 </main>
-<footer>
-	<div class="links">
+
+<footer class="p-8 bg-green-800">
+	<div class="flex flex-row flex-nowrap justify-center align-center">
 		{#each links as link}
-			<a href={link.href}>{link.text}</a>
+			<a href={link.href} class="text-white font-5 no-underline p-4">{link.text}</a>
 		{/each}
 	</div>
-	<div class="copy">
-		<p>
+	<div class="m-auto text-center">
+		<p class="text-white">
 			&COPY; {new Date().getFullYear()} Nasuke
 		</p>
 	</div>
@@ -53,56 +58,5 @@
 		margin: 0;
 		color: rgb(48, 48, 48);
 		font-family: 'Roboto', sans-serif;
-	}
-
-	nav {
-		padding: 1rem;
-		padding-left: 2rem;
-		display: flex;
-		justify-content: center;
-		flex-flow: row nowrap;
-		align-items: center;
-		background-color: seagreen;
-	}
-
-	a {
-		color: white;
-		font-size: 1.2rem;
-		text-decoration: none;
-		padding: 1rem;
-	}
-
-	main {
-		flex-grow: 1;
-		padding: 1rem;
-		max-width: 60rem;
-		margin: auto;
-	}
-
-	footer {
-		padding: 2rem;
-		background-color: rgb(40, 80, 57);
-	}
-
-	footer > .links {
-		display: flex;
-		justify-content: center;
-		flex-flow: row nowrap;
-		align-items: center;
-	}
-
-	footer > .copy {
-		margin: auto;
-		text-align: center;
-	}
-
-	footer > .copy > p {
-		color: white;
-	}
-
-	@media (min-width: 48rem) {
-		nav {
-			justify-content: flex-start;
-		}
 	}
 </style>

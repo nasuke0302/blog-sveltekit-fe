@@ -9,13 +9,6 @@
 	<title>Home</title>
 </svelte:head>
 
-<section>
+<section class="my-12">
 	<Posts {posts} />
 </section>
-
-<style>
-	section {
-		margin-bottom: 3rem;
-		margin-top: 3rem;
-	}
-</style>
