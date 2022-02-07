@@ -11,60 +11,35 @@
 {#if !author}
 	<p>No author found</p>
 {:else}
-	<div class="author-container">
-		{#if image}
-			<img src={image.width(250).url()} alt={author.name} loading="lazy" width="250" height="250" />
+	<div class="mt-4 mb-16">
+		<div class="grid grid-cols-1 md:grid-cols-[250px_auto] gap-8">
+			{#if image}
+				<img
+					class="rounded-full border border-solid border-cyan-600 aspect-square"
+					src={image.width(250).url()}
+					alt={author.name}
+					loading="lazy"
+					width="250"
+					height="250"
+				/>
+			{/if}
+
+			<div class="flex flex-col justify-center items-start gap-4">
+				{#if author.name}
+					<h1 class="text-3xl">{author.name}</h1>
+				{/if}
+
+				{#if author.bio}
+					<div>
+						<RichText blocks={author.bio} />
+					</div>
+				{/if}
+			</div>
+		</div>
+		{#if author.posts}
+			<div class="my-8">
+				<List posts={author.posts} title="Published Posts" />
+			</div>
 		{/if}
-
-		<div class="author-info">
-			{#if author.name}
-				<h1>{author.name}</h1>
-			{/if}
-
-			{#if author.bio}
-				<div>
-					<RichText blocks={author.bio} />
-				</div>
-			{/if}
-		</div>
 	</div>
-	{#if author.posts}
-		<div class="posts">
-			<List posts={author.posts} title="Published Posts" />
-		</div>
-	{/if}
 {/if}
-
-<style>
-	.author-container {
-		display: grid;
-		grid-template-columns: 1fr;
-		grid-gap: 2rem;
-	}
-
-	img {
-		aspect-ratio: 1/1;
-		border-radius: 250px;
-		border: 1px solid rgb(243, 192, 192);
-		justify-self: center;
-	}
-
-	.author-info {
-		display: flex;
-		flex-flow: column;
-		justify-content: center;
-		align-items: flex-start;
-		grid-gap: 1rem;
-	}
-
-	.posts {
-		margin-top: 2rem;
-		margin-bottom: 2rem;
-	}
-
-	@media (min-width: 48rem) {
-		.author-container {
-			grid-template-columns: 250px auto;
-		}
-	}
-</style>

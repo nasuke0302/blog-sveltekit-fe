@@ -3,20 +3,6 @@
 	export let category: ICategory;
 </script>
 
-{#if !category}
-	return
-{:else}
-	<span>{category.title}</span>
-{/if}
-
-<style>
-	span {
-		color: white;
-		font-size: 0.6rem;
-		font-weight: 400;
-		padding: 0.4rem 0.5rem;
-		background-color: steelblue;
-		border-radius: 1rem;
-		vertical-align: middle;
-	}
-</style>
+<span class="text-white text-xs rounded-2xl font-semibold px-2 py-1 bg-cyan-500 align-middle"
+	>{category.title}</span
+>
