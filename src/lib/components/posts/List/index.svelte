@@ -8,30 +8,11 @@
 
 {#if posts?.length > 0}
 	{#if title}
-		<h2>{title}</h2>
+		<h2 class="text-center mb-4 text-3xl">{title}</h2>
 	{/if}
-	<div class="post-list">
+	<div class="grid grid-cols-1 lg:grid-cols-3 gap-x-4 gap-y-8">
 		{#each posts as post}
 			<Item {post} />
 		{/each}
 	</div>
 {/if}
-
-<style>
-	.post-list {
-		display: grid;
-		grid-template-columns: 1fr;
-		grid-gap: 2rem 1rem;
-	}
-
-	h2 {
-		text-align: center;
-		margin-bottom: 1rem;
-	}
-
-	@media (min-width: 48rem) {
-		.post-list {
-			grid-template-columns: repeat(3, 1fr);
-		}
-	}
-</style>

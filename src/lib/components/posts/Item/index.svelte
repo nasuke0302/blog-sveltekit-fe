@@ -9,30 +9,38 @@
 	const truncatedBody = toPlainText(post.body).slice(0, 200);
 </script>
 
-<div class="post" on:click={() => goto(`/posts/${post.slug.current}`)}>
-	<div class="image">
+<div
+	on:click={() => goto(`/posts/${post.slug.current}`)}
+	class="flex flex-col justify-start align-start cursor-pointer bg-white rounded-md shadow-sm hover:shadow-md transition ease-in-out duration-200"
+>
+	<div class="w-full h-48">
 		{#if image}
-			<div style={`background-image: url(${image.width(280).url()})`} />
+			<div
+				class="w-full h-full bg-gray-200 bg-cover bg-repeat bg-center"
+				style={`background-image: url(${image.width(280).url()})`}
+			/>
 		{/if}
 	</div>
-	<div class="post-body">
+	<div class="p-4 grow flex flex-col justify-between">
 		{#if post._updatedAt}
-			<h6>Last updated on {new Date(post._updatedAt).toLocaleString()}</h6>
+			<h6 class="text-gray-500 mb-2 text-xs">
+				Last updated on {new Date(post._updatedAt).toLocaleString()}
+			</h6>
 		{/if}
 		{#if post.title}
-			<h4>{post.title}</h4>
+			<h4 class="text-gray-600 mb-3 text-xl">{post.title}</h4>
 		{/if}
 
 		{#if post.author}
-			<span>By {post.author.name}</span>
+			<span class="text-gray-700 mb-3 text-xs">By {post.author.name}</span>
 		{/if}
 
 		{#if post.body}
-			<p>{truncatedBody}...</p>
+			<p class="grow">{truncatedBody}...</p>
 		{/if}
 
 		{#if post.categories}
-			<div class="categories">
+			<div class="flex flex-row flex-wrap justify-start items-start gap-2 mt-4">
 				{#each post.categories as cat}
 					<Category category={cat} />
 				{/each}
@@ -40,64 +48,3 @@
 		{/if}
 	</div>
 </div>
-
-<style>
-	.post {
-		display: flex;
-		flex-flow: column;
-		justify-content: flex-start;
-		align-items: flex-start;
-		cursor: pointer;
-		background-color: white;
-		border-radius: 0.5rem;
-		transition: 0.2s all ease;
-		box-shadow: 0 1px 3px rgb(186, 186, 186);
-	}
-
-	.post:hover {
-		box-shadow: 0 3px 6px rgb(186, 186, 186);
-	}
-
-	.image {
-		width: 100%;
-		height: 200px;
-	}
-
-	.image > div {
-		width: 100%;
-		height: 100%;
-		background-color: rgb(169, 169, 169);
-		background-size: cover;
-		background-repeat: no-repeat;
-		background-position: center;
-	}
-
-	.post-body {
-		padding: 1rem;
-	}
-	h6 {
-		color: rgb(201, 201, 201);
-		margin-bottom: 0.5rem;
-	}
-
-	h4 {
-		color: rgb(136, 136, 136);
-		font-size: 1.5rem;
-		margin-bottom: 0.8rem;
-	}
-
-	span {
-		color: rgb(136, 136, 136);
-		font-size: 0.7rem;
-		margin-bottom: 0.3rem;
-	}
-
-	.categories {
-		display: flex;
-		flex-flow: row wrap;
-		justify-content: flex-start;
-		align-items: center;
-		grid-gap: 0.5rem;
-		margin-top: 1rem;
-	}
-</style>
