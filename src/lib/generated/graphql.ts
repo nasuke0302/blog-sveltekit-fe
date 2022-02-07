@@ -857,12 +857,120 @@ export type StringFilter = {
   nin?: InputMaybe<Array<Scalars['String']>>;
 };
 
+export type AuthorAndAUthorPostsBySlugQueryVariables = Exact<{
+  slug: Scalars['String'];
+}>;
+
+
+export type AuthorAndAUthorPostsBySlugQuery = { __typename?: 'RootQuery', allAuthor: Array<{ __typename?: 'Author', _createdAt?: any | null, name?: string | null, bioRaw?: any | null, slug?: { __typename?: 'Slug', current?: string | null } | null, image?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null } | null, hotspot?: { __typename?: 'SanityImageHotspot', x?: number | null, y?: number | null, width?: number | null, height?: number | null } | null, crop?: { __typename?: 'SanityImageCrop', top?: number | null, bottom?: number | null, left?: number | null, right?: number | null } | null } | null }>, allPost: Array<{ __typename?: 'Post', title?: string | null, bodyRaw?: any | null, slug?: { __typename?: 'Slug', current?: string | null } | null, mainImage?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null } | null, hotspot?: { __typename?: 'SanityImageHotspot', x?: number | null, y?: number | null, width?: number | null, height?: number | null } | null, crop?: { __typename?: 'SanityImageCrop', top?: number | null, bottom?: number | null, left?: number | null, right?: number | null } | null } | null, categories?: Array<{ __typename?: 'Category', title?: string | null } | null> | null }> };
+
+export type PostBySlugQueryVariables = Exact<{
+  slug: Scalars['String'];
+}>;
+
+
+export type PostBySlugQuery = { __typename?: 'RootQuery', allPost: Array<{ __typename?: 'Post', _updatedAt?: any | null, title?: string | null, bodyRaw?: any | null, author?: { __typename?: 'Author', name?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null } | null, slug?: { __typename?: 'Slug', current?: string | null } | null, mainImage?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null } | null, hotspot?: { __typename?: 'SanityImageHotspot', x?: number | null, y?: number | null, width?: number | null, height?: number | null } | null, crop?: { __typename?: 'SanityImageCrop', top?: number | null, bottom?: number | null, left?: number | null, right?: number | null } | null } | null, categories?: Array<{ __typename?: 'Category', title?: string | null } | null> | null }> };
+
 export type PostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type PostsQuery = { __typename?: 'RootQuery', allPost: Array<{ __typename?: 'Post', _id?: string | null, _updatedAt?: any | null, title?: string | null, bodyRaw?: any | null, slug?: { __typename?: 'Slug', current?: string | null } | null, mainImage?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null } | null, hotspot?: { __typename?: 'SanityImageHotspot', x?: number | null, y?: number | null, width?: number | null, height?: number | null } | null, crop?: { __typename?: 'SanityImageCrop', top?: number | null, bottom?: number | null, left?: number | null, right?: number | null } | null } | null, author?: { __typename?: 'Author', name?: string | null } | null, categories?: Array<{ __typename?: 'Category', title?: string | null } | null> | null }> };
 
 
+export const AuthorAndAUthorPostsBySlugDocument = gql`
+    query authorAndAUthorPostsBySlug($slug: String!) {
+  allAuthor(where: {slug: {current: {eq: $slug}}}) {
+    _createdAt
+    name
+    bioRaw
+    slug {
+      current
+    }
+    image {
+      asset {
+        url
+      }
+      hotspot {
+        x
+        y
+        width
+        height
+      }
+      crop {
+        top
+        bottom
+        left
+        right
+      }
+    }
+  }
+  allPost(where: {author: {slug: {current: {eq: $slug}}}}) {
+    title
+    slug {
+      current
+    }
+    mainImage {
+      asset {
+        url
+      }
+      hotspot {
+        x
+        y
+        width
+        height
+      }
+      crop {
+        top
+        bottom
+        left
+        right
+      }
+    }
+    bodyRaw
+    categories {
+      title
+    }
+  }
+}
+    `;
+export const PostBySlugDocument = gql`
+    query PostBySlug($slug: String!) {
+  allPost(where: {slug: {current: {eq: $slug}}}) {
+    _updatedAt
+    title
+    bodyRaw
+    author {
+      name
+      slug {
+        current
+      }
+    }
+    slug {
+      current
+    }
+    mainImage {
+      asset {
+        url
+      }
+      hotspot {
+        x
+        y
+        width
+        height
+      }
+      crop {
+        top
+        bottom
+        left
+        right
+      }
+    }
+    categories {
+      title
+    }
+  }
+}
+    `;
 export const PostsDocument = gql`
     query Posts {
   allPost(sort: {_updatedAt: DESC}) {
@@ -899,4 +1007,6 @@ export const PostsDocument = gql`
   }
 }
     `;
+export type AuthorAndAUthorPostsBySlugQueryStore = OperationStore<AuthorAndAUthorPostsBySlugQuery, AuthorAndAUthorPostsBySlugQueryVariables>;
+export type PostBySlugQueryStore = OperationStore<PostBySlugQuery, PostBySlugQueryVariables>;
 export type PostsQueryStore = OperationStore<PostsQuery, PostsQueryVariables>;

@@ -7,76 +7,26 @@
 
 <script lang="ts">
 	import { onDestroy } from 'svelte';
-	import { gql, operationStore, query } from '@urql/svelte';
+	import { operationStore, query } from '@urql/svelte';
 	import List from '$lib/components/posts/List/index.svelte';
 	import RichText from '$lib/components/RichText/index.svelte';
 	import { imageBuilder } from '$lib/utils';
-	import type { IAuthor, IPost } from '$lib/interfaces';
+	import type { Author, Post } from '$lib/generated/graphql';
+	import {
+		AuthorAndAUthorPostsBySlugDocument,
+		AuthorAndAUthorPostsBySlugQuery
+	} from '$lib/generated/graphql';
 	import type { ImageUrlBuilder } from '@sanity/image-url/lib/types/builder';
 
 	export let slug: string;
-	let author: IAuthor;
+	let author: Author;
 	let image: ImageUrlBuilder;
-	let posts: IPost[];
+	let posts: Post[];
 
-	const authorQuery = gql`
-		query allAuthors($slug: String!) {
-			allAuthor(where: { slug: { current: { eq: $slug } } }) {
-				_createdAt
-				name
-				bio: bioRaw
-				slug {
-					current
-				}
-				image {
-					asset {
-						url
-					}
-					hotspot {
-						x
-						y
-						width
-						height
-					}
-					crop {
-						top
-						bottom
-						left
-						right
-					}
-				}
-			}
-			allPost(where: { author: { slug: { current: { eq: $slug } } } }) {
-				title
-				slug {
-					current
-				}
-				mainImage {
-					asset {
-						url
-					}
-					hotspot {
-						x
-						y
-						width
-						height
-					}
-					crop {
-						top
-						bottom
-						left
-						right
-					}
-				}
-				body: bodyRaw
-				categories {
-					title
-				}
-			}
-		}
-	`;
-
-	const authors = operationStore(authorQuery, { slug });
+	const authors = operationStore<AuthorAndAUthorPostsBySlugQuery>(
+		AuthorAndAUthorPostsBySlugDocument,
+		{ slug }
+	);
 	query(authors);
 
 	const unsubscribe = authors.subscribe((value) => {
@@ -115,9 +65,9 @@
 					<h1 class="text-3xl">{author.name}</h1>
 				{/if}
 
-				{#if author?.bio}
+				{#if author?.bioRaw}
 					<div>
-						<RichText blocks={author.bio} />
+						<RichText blocks={author.bioRaw} />
 					</div>
 				{/if}
 			</div>
