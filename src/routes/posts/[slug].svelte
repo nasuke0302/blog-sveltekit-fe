@@ -7,7 +7,7 @@
 
 <script lang="ts">
 	import { onDestroy } from 'svelte';
-	import { gql, operationStore, query } from '@urql/svelte';
+	import { operationStore, query } from '@urql/svelte';
 	import RichText from '$lib/components/RichText/index.svelte';
 	import Category from '$lib/components/posts/Category/index.svelte';
 	import { formatDate, imageBuilder } from '$lib/utils';
