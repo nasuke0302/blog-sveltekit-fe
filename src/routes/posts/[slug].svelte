@@ -1,21 +1,81 @@
-<script>
+<script context="module">
+	export const load = async ({ params }) => {
+		const { slug } = params;
+		return { props: { slug } };
+	};
+</script>
+
+<script lang="ts">
+	import { onDestroy } from 'svelte';
+	import { gql, operationStore, query } from '@urql/svelte';
 	import RichText from '$lib/components/RichText/index.svelte';
 	import Category from '$lib/components/posts/Category/index.svelte';
 	import { formatDate, imageBuilder } from '$lib/utils';
-	/**@type {import("$lib/interfaces").IPost}  */
-	export let post;
+	import type { IPost } from '$lib/interfaces';
+	import type { ImageUrlBuilder } from '@sanity/image-url/lib/types/builder';
 
-	const image = imageBuilder.image(post?.mainImage);
+	export let slug: string;
+	let post: IPost;
+	let image: ImageUrlBuilder;
+
+	const postQuery = gql`
+		query allPost($slug: String!) {
+			allPost(where: { slug: { current: { eq: $slug } } }) {
+				_updatedAt
+				title
+				body: bodyRaw
+				author {
+					name
+					slug {
+						current
+					}
+				}
+				slug {
+					current
+				}
+				mainImage {
+					asset {
+						url
+					}
+					hotspot {
+						x
+						y
+						width
+						height
+					}
+					crop {
+						top
+						bottom
+						left
+						right
+					}
+				}
+				categories {
+					title
+				}
+			}
+		}
+	`;
+
+	const posts = operationStore(postQuery, { slug });
+	query(posts);
+
+	const unsubscribe = posts.subscribe((value) => {
+		post = value?.data?.allPost?.[0];
+		image = imageBuilder.image(post?.mainImage);
+	});
+
+	onDestroy(unsubscribe);
 </script>
 
 <svelte:head>
 	<title>{post?.title ?? 'Post'} | Blogs</title>
 </svelte:head>
 
-{#if !post}
-	<h1>The Sadness</h1>
-	<p>No post found</p>
-	<a href="/">Go home, buddy</a>
+{#if $posts.fetching}
+	<p>Loading...</p>
+{:else if $posts.error}
+	<p>Oopsie! {$posts.error.message}</p>
 {:else}
 	<div class="md:mt-8 mb-16">
 		<div

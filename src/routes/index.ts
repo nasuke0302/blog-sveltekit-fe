@@ -2,7 +2,7 @@ import { client } from '$lib/utils';
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export async function get() {
-	try {
+	/* try {
 		const posts = await client.fetch(
 			`*[_type=="post"]{_id, _updatedAt, title, slug, body, mainImage, author->{name}, categories[]->{title}} | order(_updatedAt desc)`
 		);
@@ -13,5 +13,6 @@ export async function get() {
 		return {
 			error: error.message
 		};
-	}
+	} */
+	return '';
 }

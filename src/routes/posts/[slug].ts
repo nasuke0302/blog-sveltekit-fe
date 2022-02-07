@@ -1,7 +1,7 @@
 import { client } from '$lib/utils';
 
 export async function get({ params }) {
-	try {
+	/* try {
 		const posts = await client.fetch(
 			`*[slug.current == $slug]{_id, _updatedAt, title, slug, body, mainImage, author->{name, slug}, categories[]->{title}}`,
 			params
@@ -13,5 +13,6 @@ export async function get({ params }) {
 		return {
 			error: error.message
 		};
-	}
+	} */
+	return '';
 }

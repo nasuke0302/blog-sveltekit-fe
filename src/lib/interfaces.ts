@@ -1,5 +1,13 @@
 import type PortableText from '@portabletext/svelte';
 
+export interface IVariables {
+	SANITY_PROJECT_ID: string;
+	SANITY_PROJECT_NAME: string;
+	SANITY_API_TOKEN: string;
+	SANITY_DATASET: string;
+	SANITY_GRAPHQL_URL: string;
+}
+
 interface ISlug {
 	current: string;
 }
@@ -8,7 +16,7 @@ export interface ICategory {
 	title: string;
 }
 
-interface IImage {
+export interface IImage {
 	_type: string;
 	asset: {
 		_ref: string;

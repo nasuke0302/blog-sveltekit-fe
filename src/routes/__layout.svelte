@@ -1,5 +1,11 @@
 <script>
 	import '../tailwind.css';
+	import { initClient } from '@urql/svelte';
+	import { variables } from '$lib/utils';
+
+	initClient({
+		url: variables.SANITY_GRAPHQL_URL
+	});
 
 	const links = [{ href: '/', text: 'Home' }];
 </script>

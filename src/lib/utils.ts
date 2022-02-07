@@ -1,12 +1,14 @@
 import sanityClient from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
 import type PortableText from '@portabletext/svelte';
+import type { IVariables } from './interfaces';
 
-export const variables = {
-	SANITY_PROJECT_ID: import.meta.env.VITE_SANITY_PROJECT_ID,
-	SANITY_PROJECT_NAME: import.meta.env.VITE_SANITY_PROJECT_NAME,
-	SANITY_API_TOKEN: import.meta.env.VITE_SANITY_API_TOKEN,
-	SANITY_DATASET: import.meta.env.VITE_SANITY_DATASET
+export const variables: IVariables = {
+	SANITY_PROJECT_ID: <string>import.meta.env.VITE_SANITY_PROJECT_ID,
+	SANITY_PROJECT_NAME: <string>import.meta.env.VITE_SANITY_PROJECT_NAME,
+	SANITY_API_TOKEN: <string>import.meta.env.VITE_SANITY_API_TOKEN,
+	SANITY_DATASET: <string>import.meta.env.VITE_SANITY_DATASET,
+	SANITY_GRAPHQL_URL: <string>import.meta.env.VITE_SANITY_GRAPHQL_URL
 };
 export const client = sanityClient({
 	projectId: <string>import.meta.env.VITE_SANITY_PROJECT_ID,

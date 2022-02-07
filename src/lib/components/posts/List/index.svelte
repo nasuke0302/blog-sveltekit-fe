@@ -1,9 +1,9 @@
-<script>
+<script lang="ts">
 	import Item from '../Item/index.svelte';
-	/** @type {import('$lib/interfaces').IPost[]} */
-	export let posts;
-	/** {String} */
-	export let title = 'Recent Posts';
+	import type { IPost } from '$lib/interfaces';
+
+	export let posts: IPost[];
+	export let title: string = 'Recent Posts';
 </script>
 
 {#if posts?.length > 0}
