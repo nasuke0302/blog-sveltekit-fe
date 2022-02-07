@@ -1,0 +1,54 @@
+query authorAndAUthorPostsBySlug($slug: String!) {
+	allAuthor(where: { slug: { current: { eq: $slug } } }) {
+		_createdAt
+		name
+		bioRaw
+		slug {
+			current
+		}
+		image {
+			asset {
+				url
+			}
+			hotspot {
+				x
+				y
+				width
+				height
+			}
+			crop {
+				top
+				bottom
+				left
+				right
+			}
+		}
+	}
+	allPost(where: { author: { slug: { current: { eq: $slug } } } }) {
+		title
+		slug {
+			current
+		}
+		mainImage {
+			asset {
+				url
+			}
+			hotspot {
+				x
+				y
+				width
+				height
+			}
+			crop {
+				top
+				bottom
+				left
+				right
+			}
+		}
+		bodyRaw
+		categories {
+			title
+		}
+	}
+}

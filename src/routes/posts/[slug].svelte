@@ -11,53 +11,15 @@
 	import RichText from '$lib/components/RichText/index.svelte';
 	import Category from '$lib/components/posts/Category/index.svelte';
 	import { formatDate, imageBuilder } from '$lib/utils';
-	import type { IPost } from '$lib/interfaces';
+	import type { Post } from '$lib/generated/graphql';
+	import { PostBySlugDocument, PostBySlugQuery } from '$lib/generated/graphql';
 	import type { ImageUrlBuilder } from '@sanity/image-url/lib/types/builder';
 
 	export let slug: string;
-	let post: IPost;
+	let post: Post;
 	let image: ImageUrlBuilder;
 
-	const postQuery = gql`
-		query allPost($slug: String!) {
-			allPost(where: { slug: { current: { eq: $slug } } }) {
-				_updatedAt
-				title
-				body: bodyRaw
-				author {
-					name
-					slug {
-						current
-					}
-				}
-				slug {
-					current
-				}
-				mainImage {
-					asset {
-						url
-					}
-					hotspot {
-						x
-						y
-						width
-						height
-					}
-					crop {
-						top
-						bottom
-						left
-						right
-					}
-				}
-				categories {
-					title
-				}
-			}
-		}
-	`;
-
-	const posts = operationStore(postQuery, { slug });
+	const posts = operationStore<PostBySlugQuery>(PostBySlugDocument, { slug });
 	query(posts);
 
 	const unsubscribe = posts.subscribe((value) => {
@@ -107,7 +69,7 @@
 			</div>
 		</div>
 		<div class="post-body">
-			<RichText blocks={post.body} />
+			<RichText blocks={post.bodyRaw} />
 		</div>
 	</div>
 {/if}

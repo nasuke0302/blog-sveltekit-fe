@@ -1,44 +1,9 @@
-<script>
+<script lang="ts">
+	import { operationStore, query } from '@urql/svelte';
 	import Posts from '$lib/components/posts/List/index.svelte';
-	import { gql, operationStore, query } from '@urql/svelte';
+	import { PostsDocument, PostsQuery } from '$lib/generated/graphql';
 
-	const postsQuery = gql`
-		{
-			allPost(sort: { _updatedAt: DESC }) {
-				_id
-				_updatedAt
-				title
-				slug {
-					current
-				}
-				body: bodyRaw
-				mainImage {
-					asset {
-						url
-					}
-					hotspot {
-						x
-						y
-						width
-						height
-					}
-					crop {
-						top
-						bottom
-						left
-						right
-					}
-				}
-				author {
-					name
-				}
-				categories {
-					title
-				}
-			}
-		}
-	`;
-	const posts = operationStore(postsQuery);
+	const posts = operationStore<PostsQuery>(PostsDocument);
 	query(posts);
 </script>
 

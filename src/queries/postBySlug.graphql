@@ -1,0 +1,36 @@
+query PostBySlug($slug: String!) {
+	allPost(where: { slug: { current: { eq: $slug } } }) {
+		_updatedAt
+		title
+		bodyRaw
+		author {
+			name
+			slug {
+				current
+			}
+		}
+		slug {
+			current
+		}
+		mainImage {
+			asset {
+				url
+			}
+			hotspot {
+				x
+				y
+				width
+				height
+			}
+			crop {
+				top
+				bottom
+				left
+				right
+			}
+		}
+		categories {
+			title
+		}
+	}
+}
