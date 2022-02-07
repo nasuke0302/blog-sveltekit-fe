@@ -8,6 +8,10 @@
 	const image = imageBuilder.image(author.image);
 </script>
 
+<svelte:head>
+	<title>{author?.name ?? 'Author'} | Blogs</title>
+</svelte:head>
+
 {#if !author}
 	<p>No author found</p>
 {:else}

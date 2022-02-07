@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-	<title>Home</title>
+	<title>Home | Blogs</title>
 </svelte:head>
 
 <section class="my-12">

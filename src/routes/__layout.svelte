@@ -1,11 +1,7 @@
 <script>
 	import '../tailwind.css';
 
-	const links = [
-		{ href: '/', text: 'Home' },
-		{ href: '/about', text: 'About' },
-		{ href: '/settings', text: 'Settings' }
-	];
+	const links = [{ href: '/', text: 'Home' }];
 </script>
 
 <svelte:head>

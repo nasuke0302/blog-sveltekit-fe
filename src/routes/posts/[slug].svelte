@@ -8,6 +8,10 @@
 	const image = imageBuilder.image(post?.mainImage);
 </script>
 
+<svelte:head>
+	<title>{post?.title ?? 'Post'} | Blogs</title>
+</svelte:head>
+
 {#if !post}
 	<h1>The Sadness</h1>
 	<p>No post found</p>
