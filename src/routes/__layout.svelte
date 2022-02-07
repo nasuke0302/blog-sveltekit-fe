@@ -1,6 +1,7 @@
-<script>
+<script lang="ts">
 	import '../tailwind.css';
-	import { initClient } from '@urql/svelte';
+	import { initClient, operationStore, query } from '@urql/svelte';
+	import { SiteSettingsDocument, SiteSettingsQuery } from '$lib/generated/graphql';
 	import { variables } from '$lib/utils';
 
 	initClient({
@@ -8,9 +9,15 @@
 	});
 
 	const links = [{ href: '/', text: 'Home' }];
+
+	const siteSettings = operationStore<SiteSettingsQuery>(SiteSettingsDocument);
+	query(siteSettings);
 </script>
 
 <svelte:head>
+	<title>{$siteSettings?.data?.SiteSettings?.title}</title>
+	<meta name="description" content={$siteSettings?.data?.SiteSettings?.title} />
+	<meta name="keywords" content={$siteSettings?.data?.SiteSettings?.keywords?.toString()} />
 	<style>
 		@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
 	</style>

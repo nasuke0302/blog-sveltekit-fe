@@ -1,0 +1,7 @@
+query siteSettings {
+	SiteSettings(id: "siteSettings") {
+		title
+		description
+		keywords
+	}
+}

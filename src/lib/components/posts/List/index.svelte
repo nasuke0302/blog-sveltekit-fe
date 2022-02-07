@@ -22,7 +22,12 @@
 	<h2 class="text-center mb-4 text-3xl">{title}</h2>
 {/if}
 <div class="my-8 flex flex-row flex-wrap gap-4 justify-center items-center">
-	<input type="text" class="px-4 py-2 rounded-md border border-green-400" bind:value={$query} />
+	<input
+		type="text"
+		class="px-4 py-2 rounded-md border border-green-400"
+		bind:value={$query}
+		placeholder="Search posts titles..."
+	/>
 	<button
 		class="button px-4 py-2 bg-green-400 hover:bg-green-500 transition ease-in-out rounded-md"
 		on:click={handleSearch}>Search</button

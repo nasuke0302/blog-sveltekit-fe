@@ -354,12 +354,14 @@ export type RootQuery = {
   Post?: Maybe<Post>;
   SanityFileAsset?: Maybe<SanityFileAsset>;
   SanityImageAsset?: Maybe<SanityImageAsset>;
+  SiteSettings?: Maybe<SiteSettings>;
   allAuthor: Array<Author>;
   allCategory: Array<Category>;
   allDocument: Array<Document>;
   allPost: Array<Post>;
   allSanityFileAsset: Array<SanityFileAsset>;
   allSanityImageAsset: Array<SanityImageAsset>;
+  allSiteSettings: Array<SiteSettings>;
 };
 
 
@@ -389,6 +391,11 @@ export type RootQuerySanityFileAssetArgs = {
 
 
 export type RootQuerySanityImageAssetArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQuerySiteSettingsArgs = {
   id: Scalars['ID'];
 };
 
@@ -438,6 +445,14 @@ export type RootQueryAllSanityImageAssetArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   sort?: InputMaybe<Array<SanityImageAssetSorting>>;
   where?: InputMaybe<SanityImageAssetFilter>;
+};
+
+
+export type RootQueryAllSiteSettingsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<Array<SiteSettingsSorting>>;
+  where?: InputMaybe<SiteSettingsFilter>;
 };
 
 export type SanityAssetSourceData = {
@@ -812,6 +827,48 @@ export type Sanity_DocumentFilter = {
   references?: InputMaybe<Scalars['ID']>;
 };
 
+export type SiteSettings = Document & {
+  __typename?: 'SiteSettings';
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  _key?: Maybe<Scalars['String']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  description?: Maybe<Scalars['String']>;
+  keywords?: Maybe<Array<Maybe<Scalars['String']>>>;
+  title?: Maybe<Scalars['String']>;
+};
+
+export type SiteSettingsFilter = {
+  /** Apply filters on document level */
+  _?: InputMaybe<Sanity_DocumentFilter>;
+  _createdAt?: InputMaybe<DatetimeFilter>;
+  _id?: InputMaybe<IdFilter>;
+  _key?: InputMaybe<StringFilter>;
+  _rev?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  _updatedAt?: InputMaybe<DatetimeFilter>;
+  description?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+};
+
+export type SiteSettingsSorting = {
+  _createdAt?: InputMaybe<SortOrder>;
+  _id?: InputMaybe<SortOrder>;
+  _key?: InputMaybe<SortOrder>;
+  _rev?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  _updatedAt?: InputMaybe<SortOrder>;
+  description?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
+};
+
 export type Slug = {
   __typename?: 'Slug';
   _key?: Maybe<Scalars['String']>;
@@ -875,6 +932,11 @@ export type PostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type PostsQuery = { __typename?: 'RootQuery', allPost: Array<{ __typename?: 'Post', _id?: string | null, _updatedAt?: any | null, title?: string | null, bodyRaw?: any | null, slug?: { __typename?: 'Slug', current?: string | null } | null, mainImage?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null } | null, hotspot?: { __typename?: 'SanityImageHotspot', x?: number | null, y?: number | null, width?: number | null, height?: number | null } | null, crop?: { __typename?: 'SanityImageCrop', top?: number | null, bottom?: number | null, left?: number | null, right?: number | null } | null } | null, author?: { __typename?: 'Author', name?: string | null } | null, categories?: Array<{ __typename?: 'Category', title?: string | null } | null> | null }> };
+
+export type SiteSettingsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SiteSettingsQuery = { __typename?: 'RootQuery', SiteSettings?: { __typename?: 'SiteSettings', title?: string | null, description?: string | null, keywords?: Array<string | null> | null } | null };
 
 
 export const AuthorAndAUthorPostsBySlugDocument = gql`
@@ -1007,6 +1069,16 @@ export const PostsDocument = gql`
   }
 }
     `;
+export const SiteSettingsDocument = gql`
+    query siteSettings {
+  SiteSettings(id: "siteSettings") {
+    title
+    description
+    keywords
+  }
+}
+    `;
 export type AuthorAndAUthorPostsBySlugQueryStore = OperationStore<AuthorAndAUthorPostsBySlugQuery, AuthorAndAUthorPostsBySlugQueryVariables>;
 export type PostBySlugQueryStore = OperationStore<PostBySlugQuery, PostBySlugQueryVariables>;
 export type PostsQueryStore = OperationStore<PostsQuery, PostsQueryVariables>;
+export type SiteSettingsQueryStore = OperationStore<SiteSettingsQuery, SiteSettingsQueryVariables>;
