@@ -2,11 +2,11 @@
 	import { goto } from '$app/navigation';
 	import Category from '$lib/components/posts/Category/index.svelte';
 	import { imageBuilder, toPlainText } from '$lib/utils';
-	import type { IPost } from '$lib/interfaces';
+	import type { Post } from '$lib/generated/graphql';
 
-	export let post: IPost;
+	export let post: Post;
 	const image = imageBuilder.image(post?.mainImage);
-	const truncatedBody = toPlainText(post.body).slice(0, 200);
+	const truncatedBody = toPlainText(post.bodyRaw).slice(0, 200);
 </script>
 
 <div
@@ -35,7 +35,7 @@
 			<span class="text-gray-700 mb-3 text-xs">By {post.author.name}</span>
 		{/if}
 
-		{#if post.body}
+		{#if post.bodyRaw}
 			<p class="grow">{truncatedBody}...</p>
 		{/if}
 

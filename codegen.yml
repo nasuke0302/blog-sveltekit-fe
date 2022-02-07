@@ -1,0 +1,12 @@
+overwrite: true
+schema: 'https://8opas4mt.api.sanity.io/v1/graphql/production/default/'
+documents: 'src/**/*.graphql'
+config:
+  withHooks: false
+generates:
+  src/lib/generated/graphql.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-urql'
+      - 'urql-svelte-operations-store'

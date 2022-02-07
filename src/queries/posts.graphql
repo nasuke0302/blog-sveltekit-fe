@@ -1,0 +1,34 @@
+query Posts {
+	allPost(sort: { _updatedAt: DESC }) {
+		_id
+		_updatedAt
+		title
+		slug {
+			current
+		}
+		bodyRaw
+		mainImage {
+			asset {
+				url
+			}
+			hotspot {
+				x
+				y
+				width
+				height
+			}
+			crop {
+				top
+				bottom
+				left
+				right
+			}
+		}
+		author {
+			name
+		}
+		categories {
+			title
+		}
+	}
+}

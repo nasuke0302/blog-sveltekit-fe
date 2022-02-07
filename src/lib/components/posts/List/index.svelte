@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Item from '../Item/index.svelte';
-	import type { IPost } from '$lib/interfaces';
+	import type { Post } from '$lib/generated/graphql';
 
-	export let posts: IPost[];
+	export let posts: Post[];
 	export let title: string = 'Recent Posts';
 </script>
 
